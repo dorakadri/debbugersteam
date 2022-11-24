@@ -1,0 +1,70 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">ADD Project</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="projectForm" (ngSubmit)="save()">
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div class="form-group">
+                  <label>Project name</label>
+                  <input type="text" class="form-control" formControlName="nomProjet" placeholder="name" >
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Client</label>
+                  <input type="text" class="form-control" formControlName="client" placeholder="Client">
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label for="email">DeadLine</label>
+                  <input class="form-control date-picker" formControlName=" deadline"  type="date" >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Required field</label>
+                  <select  class="custom-select form-control" formControlName="field">
+                    <option selected>Select a field</option>
+                    <option value="1">IA</option>
+                    <option value="2">Cloud</option>
+                    <option value="3">DEV</option>
+                    <option value="3">Reseaux</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea rows="4" cols="80" class="form-control"  formControlName="decription" placeholder="write your Description here " ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary btn-round btn-success" >
+                <i ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                </svg></i> SAVE
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+
