@@ -1,0 +1,10 @@
+.tableall{
+    max-height: 500px;
+    overflow-x: hidden;
+}
+
+.stickyhead{
+    position: sticky;
+    z-index: 1;
+    top: 0;
+}

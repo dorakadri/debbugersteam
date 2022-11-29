@@ -9,7 +9,8 @@ import { ListprojectComponent } from './listproject/listproject.component';
 const routes: Routes = [{path:'',component:ListprojectComponent},
 {path:'list',component:ListprojectComponent},
 {path:'detail/:id',component:DetailprojectComponent},
-{path:'addnewproject',component:FormComponent}
+{path:'addnewproject',component:FormComponent},
+{path:'Modifier/:id',component:FormComponent },
 ]
 
 @NgModule({

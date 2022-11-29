@@ -11,6 +11,9 @@ export class ListprojectComponent implements OnInit {
   public page =1 ;
   public pageSize:10;
   public list: projet[];
+  public listf : projet[];
+  public desc:boolean=false ;
+  searchText:String="";
   constructor(private projetserv : ProjectsService) { }
 
   ngOnInit(): void {
@@ -22,6 +25,9 @@ export class ListprojectComponent implements OnInit {
       () => { console.log('error') },
       () => { console.log('complete') }
     )
+   
+
+
   }
 
   deleteproject(id:number){
@@ -33,6 +39,27 @@ export class ListprojectComponent implements OnInit {
         this.list.splice(i,1)}
     )
   
+  }
+ 
+  onSearchtextentered(value:String){
+    this.searchText=value ;
+    console.log(this.searchText);
+
+  }
+
+  sortdata(){
+    console.log(this.desc +"initial");
+    if(this.desc){
+    let newarr =this.list.sort((a,b)=>a.nomProjet.localeCompare(b.nomProjet));
+    this.list=newarr
+    
+    }else{
+      let newarr =this.list.sort((a,b)=>b.nomProjet.localeCompare(a.nomProjet));
+      this.list=newarr
+      console.log(this.desc +"false");
+    }
+    this.desc= !this.desc
+    console.log(this.desc +"after");
   }
 
 }

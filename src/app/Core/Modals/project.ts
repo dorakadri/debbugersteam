@@ -1,3 +1,5 @@
+import { equipe } from "./equipe";
+
 export class projet {
     idProjet: number;
     nomProjet: string;
@@ -5,8 +7,10 @@ export class projet {
     decription: string ;
     deadline: Date;
     etat: string ;
-    equipes:string[];
+    field:string
+    equipes:equipe[] | string[];
+   // equipestring!:string ; 
 }
 
 
-
+ 

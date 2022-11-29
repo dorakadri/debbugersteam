@@ -7,6 +7,7 @@ import { DetailprojectComponent } from './detailproject/detailproject.component'
 import { AddprojectComponent } from './addproject/addproject.component';
 import { FormComponent } from './form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -14,13 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListprojectComponent,
     DetailprojectComponent,
     AddprojectComponent,
-    FormComponent
+    FormComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
     ProjectsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class ProjectsModule { }

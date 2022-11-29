@@ -14,18 +14,33 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex  justify-content-between " >
           <h4 class="card-title"> Project List</h4>
-          <button routerLink="addnewproject">ADD PROJECT </button>
+          <button  class="btn btn-success" routerLink="addnewproject">ADD PROJECT </button>
         </div>
         <div class="card-body">
-          <div class="table-responsive">
+          <div class="col-sm-6 col-lg-3">
+            
+             <app-search (SearchTextchanged)="onSearchtextentered($event)" ></app-search>
+         
+          </div>
+          <div class="table-responsive tableall ">
           
              
-                <table class="table align-middle mb-0 bg-white">
-                  <thead class="bg-light">
-                <th>
+                <table class="table align-middle mb-0 bg-white  " >
+                  <thead class="bg-light stickyhead">
+                <th (click)="sortdata() " >
+                  
                   Project Name
+                  <i  *ngIf="desc === true "> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-down-alt" viewBox="0 0 16 16">
+                    <path d="M12.96 7H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V7z"/>
+                    <path fill-rule="evenodd" d="M10.082 12.629 9.664 14H8.598l1.789-5.332h1.234L13.402 14h-1.12l-.419-1.371h-1.781zm1.57-.785L11 9.688h-.047l-.652 2.156h1.351z"/>
+                    <path d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z"/>
+                  </svg></i>
+                  <i *ngIf="desc === false "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sort-alpha-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z"/>
+                    <path d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zm-8.46-.5a.5.5 0 0 1-1 0V3.707L2.354 4.854a.5.5 0 1 1-.708-.708l2-1.999.007-.007a.498.498 0 0 1 .7.006l2 2a.5.5 0 1 1-.707.708L4.5 3.707V13.5z"/>
+                  </svg></i>
                 </th>
                 <th>
                   Client
@@ -41,8 +56,10 @@
                   </th>
               </thead>
               <tbody *ngFor="let l of list">
-                <tr>
-                  <td>
+                <!-- <tr *ngIf="searchText === '' || l.nomProjet.toLowerCase().includes(searchText)" > my  first approach -->
+                  <tr *ngIf="searchText === '' || l.nomProjet.toLowerCase().includes(searchText)" >
+                  <td >
+                
                    {{l.nomProjet}}
                   </td>
                   <td>
@@ -51,11 +68,11 @@
                  
                   <td>{{l.deadline}}</td>
                   <td>
-                    <span class="badge badge-success rounded-pill d-inline">{{l.etat}}</span>
+                    <span class="badge badge-success rounded-pill d-inline" [ngClass]="{'badge-danger': l.etat==='ANNULER' , 'badge-warning':l.etat==='ENCOUR' }" > {{l.etat}}</span>
                   </td>
                   <td>
                     <div class="button-container">
-                      <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                      <button   [routerLink]="['Modifier',l.idProjet]" href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                           </svg>
