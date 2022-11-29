@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TeamDetailsComponent } from './team-details/team-details.component';
+import { TeamFormComponent } from './team-form/team-form.component';
+import { TeamsListComponent } from './teams-list/teams-list.component';
 
-const routes: Routes = [];
+const routes: Routes = [{path:'',component:TeamsListComponent},
+{path:'ajouter',component:TeamFormComponent},
+{path:'details/:id',component:TeamDetailsComponent},
+{path:'modifier/:id',component:TeamDetailsComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

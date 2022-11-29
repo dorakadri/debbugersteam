@@ -1,0 +1,49 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card ">
+        <div class="card-header">
+          <h5 class="title">{{action}} Une equipe</h5>
+        </div>
+        <div class="card-body">
+          <form #f="ngForm">
+            <div class="form-group col-md-6">
+               <label>Nom:*</label>
+               <input type="text" name="nomEquipe" [(ngModel)]="team.nomEquipe"
+               class="form-control" required minlength="3"
+                pattern="[A-Za-z]{3,20}$" #n="ngModel">
+                <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+                   <div *ngIf="n.hasError('required')">
+                      this field is required
+                     </div>
+                   <div *ngIf="n.hasError('minlength')">
+                      minlength = 3 !
+                   </div>
+                   <div *ngIf="n.hasError('pattern')">
+                     error pattern
+                  </div>
+               </div>
+            </div>
+            <div class="form-group col-md-6">
+               <label>Niveau:*</label>
+               <select [(ngModel)]="team.niveau" name="niveau" class="form-control" required>
+                <option value="JUNIOR">JUNIOR</option>
+                <option value="SINIOR">SINIOR</option>
+                <option value="EXPERT">EXPERT</option>
+              </select>
+            
+             </div>
+             
+             <button (click)="saveTeam()"
+              class="btn btn-sm btn-success">
+               {{action}}
+             </button>
+           
+           </form>           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

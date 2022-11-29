@@ -1,0 +1,32 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card ">
+        <div class="card-header">
+          <h5 class="title">Equipe</h5>
+        </div>
+        <div class="card-body">
+          <form #f="ngForm">
+            <div class="form-group col-md-6">
+               <label>id equipe:*</label>
+               <input type="text" name="nomDepart" [(ngModel)]="team.idEquipe"
+               class="form-control" disabled="true">
+            </div>
+            <div class="form-group col-md-6">
+               <label>nom equipe:*</label>
+               <input type="text" name="adresse" [(ngModel)]="team.nomEquipe"
+               class="form-control" disabled="true">             
+             </div>
+             <div class="form-group col-md-6">
+                <label>niveau:*</label>
+                <input type="text" name="adresse" [(ngModel)]="team.niveau"
+                class="form-control" disabled="true">             
+              </div>
+          </form>           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
