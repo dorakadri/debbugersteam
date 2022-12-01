@@ -2,13 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DepartmentsRoutingModule } from './departments-routing.module';
+import { FormsModule } from '@angular/forms';
+import { DepartmentsComponent } from './departments.component';
+import { FormDepartmentsComponent } from './form-departments/form-departments.component';
+import { ListDepartmentsComponent } from './list-departments/list-departments.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DetailDepartmentsComponent } from './detail-departments/detail-departments.component';
+
 
 
 @NgModule({
-  declarations: [],
+  declarations: [DepartmentsComponent,
+  FormDepartmentsComponent,
+ListDepartmentsComponent,
+DetailDepartmentsComponent],
   imports: [
     CommonModule,
-    DepartmentsRoutingModule
+    FormsModule,
+    DepartmentsRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class DepartmentsModule { }

@@ -1,0 +1,33 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card ">
+        <div class="card-header">
+          <h5 class="title">Department</h5>
+        </div>
+        <div class="card-body">
+          <form #f="ngForm">
+            <div class="form-group col-md-6">
+               <label>Nom:*</label>
+               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart"
+               class="form-control" disabled="true">
+            </div>
+            <div class="form-group col-md-6">
+               <label>Adresse:*</label>
+               <input type="text" name="adresse" [(ngModel)]="department.adresse"
+               class="form-control" disabled="true">             
+             </div>
+             <div class="form-group col-md-6">
+              <label>Nombre des etudiants :*</label>
+              <input type="text" name="nbr" [(ngModel)]="nbr"
+              class="form-control" disabled="true">             
+            </div>             
+          </form>           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

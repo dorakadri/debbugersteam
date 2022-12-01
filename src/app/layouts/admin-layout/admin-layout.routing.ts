@@ -12,5 +12,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'students',      loadChildren: () => import('../../students/students.module').then(x=>x.StudentsModule) },
     { path: 'teams',      loadChildren: () => import('../../teams/teams.module').then(x=>x.TeamsModule) },
     { path: 'universities',      loadChildren: () => import('../../universities/universities.module').then(x=>x.UniversitiesModule) },
-    { path: 'departments',      loadChildren: () => import('../../departments/departments.module').then(x=>x.DepartmentsModule) }
+    { path: 'departments',      loadChildren: () => import('../../departments/departments.module').then(x=>x.DepartmentsModule) },
+    { path: 'enseignants',      loadChildren: () => import('../../enseignants/enseignants.module').then(x=>x.EnseignantsModule) }
 ];

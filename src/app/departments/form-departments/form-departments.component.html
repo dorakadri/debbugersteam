@@ -1,0 +1,57 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card ">
+        <div class="card-header">
+          <h5 class="title">{{action}} un Department</h5>
+        </div>
+        <div class="card-body">
+          <form #f="ngForm">
+            <div class="form-group col-md-6">
+               <label>Nom:*</label>
+               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart"
+               class="form-control" required minlength="3"
+                pattern="[A-Za-z]{3,20}$" #n="ngModel">
+                <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
+                   <div *ngIf="n.hasError('required')">
+                      this field is required
+                     </div>
+                   <div *ngIf="n.hasError('minlength')">
+                      minlength = 3 !
+                   </div>
+                   <div *ngIf="n.hasError('pattern')">
+                     error pattern
+                  </div>
+               </div>
+            </div>
+            <div class="form-group col-md-6">
+               <label>Adresse:*</label>
+               <input type="text" name="adresse" [(ngModel)]="department.adresse"
+               class="form-control" required minlength="3"
+                pattern="[A-Za-z]{3,20}$" #nd="ngModel">
+               <div class="alert alert-danger" *ngIf="nd.invalid && nd.touched">
+                   <div *ngIf="nd.hasError('required')">
+                      this field is required
+                     </div>
+                   <div *ngIf="nd.hasError('minlength')">
+                      minlength = 3 !
+                   </div>
+                   <div *ngIf="nd.hasError('pattern')">
+                     error pattern
+                  </div>
+               </div>
+             </div>
+             
+             <button (click)="saveDepartment()"
+              class="btn btn-sm btn-success">
+               {{action}}
+             </button>
+           
+           </form>           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
