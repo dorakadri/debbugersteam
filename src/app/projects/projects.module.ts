@@ -8,6 +8,7 @@ import { AddprojectComponent } from './addproject/addproject.component';
 import { FormComponent } from './form/form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
+import { DocstestComponent } from './docstest/docstest.component';
 
 
 @NgModule({
@@ -16,13 +17,15 @@ import { SearchComponent } from './search/search.component';
     DetailprojectComponent,
     AddprojectComponent,
     FormComponent,
-    SearchComponent
+    SearchComponent,
+    DocstestComponent
   ],
   imports: [
     CommonModule,
     ProjectsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    
 
   ]
 })
