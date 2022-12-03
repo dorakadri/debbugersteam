@@ -14,6 +14,7 @@ export class ListprojectComponent implements OnInit {
   public desc: boolean = false;
   public done: number;
   public encour: number;
+  public thelink;
   searchText: String = "";
   constructor(private projetserv: ProjectsService) {}
 
@@ -85,5 +86,27 @@ export class ListprojectComponent implements OnInit {
     }
     this.desc = !this.desc;
     console.log(this.desc + "after");
+  }
+
+  onDownloadfiles(fileid: number): void {
+    this.projetserv.download(fileid).subscribe(
+      (e) => {
+        let filename = e.headers
+          .get("Content-Disposition")
+          ?.split(";")[1]
+          .split("=")[1];
+
+        let blob: Blob = e.body as Blob;
+        let a = document.createElement("a");
+        a.download = filename;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+
+        //  this.reportProgress(event);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

@@ -24,8 +24,7 @@ export class FormComponent implements OnInit {
   public idselected: number[] = [];
   public projectForm: FormGroup;
   public action: string;
-  public select: string;
-  public checked: boolean = false;
+  public idtodoc: number = 0;
   constructor(
     private builder: FormBuilder,
     private projetserv: ProjectsService,
@@ -63,6 +62,7 @@ export class FormComponent implements OnInit {
       this.list = response;
       this.selectedList = response;
     });
+
     if (this.action === "ADD") {
       this.projectForm = this.builder.group({
         nomProjet: ["", [Validators.required, Validators.minLength(3)]],
@@ -107,6 +107,7 @@ export class FormComponent implements OnInit {
       if (this.action == "ADD") {
         this.projetserv.postproject(this.projectForm.value).subscribe(
           (response: number) => {
+            this.idtodoc = response;
             if (this.idselected.length != 0)
               this.idselected.forEach((e) =>
                 this.projetserv.assignteamtoproject(e, response).subscribe()
@@ -120,12 +121,10 @@ export class FormComponent implements OnInit {
           }
         );
       } else {
-        //   console.log( this.projet);
         this.projet = { ...this.projectForm.value };
-        console.log(this.projectForm.value);
-
+        let idprojet = this.currentRoute.snapshot.params["id"];
         this.projetserv
-          .Updateprojet(this.projet)
+          .Updateprojet(this.projet, idprojet)
           .subscribe((response: projet) => {
             if (this.idselected.length != 0)
               this.idselected.forEach((e) =>
@@ -161,4 +160,17 @@ export class FormComponent implements OnInit {
       console.log(this.idselected);
     }
   }
+
+  /*  onclick(e) {
+    console.log(typeof e.target.files[0]);
+
+    this.projetserv.upload(e.target.files[0]).subscribe(
+      (event) => {
+        console.log(event);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  } */
 }

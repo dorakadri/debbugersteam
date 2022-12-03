@@ -8,6 +8,7 @@ export class projet {
   deadline: Date;
   etat: string;
   field: string;
+  file: { data: Blob; id: number; name: string; type: string };
   equipes: equipe[] | string[];
   // equipestring!:string ;
 }

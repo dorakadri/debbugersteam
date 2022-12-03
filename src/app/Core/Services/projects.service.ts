@@ -40,8 +40,8 @@ export class ProjectsService {
     //(`${this.url}equipetoprojet/${ideq}/${idpr}`);
   }
 
-  public Updateprojet(p: projet) {
-    return this.http.put(this.url + "Updateprojet", p);
+  public Updateprojet(p: projet, idprojet: number) {
+    return this.http.put(this.url + `Updateprojet/${idprojet}`, p);
   }
 
   public getidequipe(id: number) {
@@ -53,19 +53,25 @@ export class ProjectsService {
   }
   ////////////////FILES////////////////////
 
-  upload(file: File): Observable<HttpEvent<any>> {
+  public assignfiletoproject(idfile: number, idproject: number) {
+    return this.http.post<number>(
+      `${this.url}assignfile/${idfile}/${idproject}`,
+      {}
+    );
+  }
+
+  upload(file: File) {
     const data: FormData = new FormData();
     data.append("filef", file);
-    return this.http.post<string>(`${this.url}upload`, data, {
+    return this.http.post<number>(`${this.url}upload`, data, {
       reportProgress: true,
-      observe: "events",
+      observe: "response",
     });
   }
 
-  download(fileid: number): Observable<HttpEvent<Blob>> {
+  download(fileid: number) {
     return this.http.get(`${this.url}files/${fileid}`, {
-      reportProgress: true,
-      observe: "events",
+      observe: "response",
       responseType: "blob",
     });
   }

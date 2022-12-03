@@ -111,6 +111,7 @@
                 <th>Client</th>
                 <th>DeadLine</th>
                 <th>Etat</th>
+                <th>Documentation</th>
                 <th class="pl-5">Actions</th>
               </thead>
               <tbody *ngFor="let l of list">
@@ -139,6 +140,16 @@
                     >
                       {{ l.etat }}</span
                     >
+                  </td>
+                  <td>
+                    <button
+                      *ngIf="l.file !== null"
+                      (click)="onDownloadfiles(l.file.id)"
+                    >
+                      {{ l.file.name }}
+                    </button>
+
+                    <span *ngIf="l.file === null"> No documentation</span>
                   </td>
                   <td>
                     <div class="button-container">

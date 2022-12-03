@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from "@angular/core";
 import { HttpClient, HttpEvent, HttpEventType } from "@angular/common/http";
 import { ProjectsService } from "../../Core/Services/projects.service";
 import { url } from "../../Core/Modals/project";
@@ -8,92 +14,33 @@ import { url } from "../../Core/Modals/project";
   templateUrl: "./docstest.component.html",
   styleUrls: ["./docstest.component.css"],
 })
-export class DocstestComponent implements OnInit {
+export class DocstestComponent implements OnInit, OnChanges {
   filesmessage: (string | Blob) & String;
   url: url = new url();
-
+  @Input() idprojectfordoc: number;
+  public file: File = new File([], "");
   constructor(private projetserv: ProjectsService) {}
 
   ngOnInit(): void {}
 
-  onUploadfiles(files: File): void {
-    const formData = new FormData();
-    console.log("//////////////");
-    console.log(files);
-    console.log("//////////////");
-    formData.append("filef", files);
-    console.log(formData.append("filef", files));
-    this.projetserv.upload(files).subscribe(
-      (event) => {
-        console.log(event);
-        // this.reportProgress(event);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-  onclick(e) {
-    console.log(typeof e.target.files[0]);
-
-    this.projetserv.upload(e.target.files[0]).subscribe(
-      (event) => {
-        console.log(event);
-        // this.reportProgress(event);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-
-  reportProgress(httpEvent: HttpEvent<string | Blob>): void {
-    switch (httpEvent.type) {
-      case HttpEventType.UploadProgress:
-        this.updateStatus(httpEvent.loaded, httpEvent.total, "Uploading");
-
-        break;
-      case HttpEventType.DownloadProgress:
-        this.updateStatus(httpEvent.loaded, httpEvent.total, "downloading");
-
-        break;
-
-      case HttpEventType.ResponseHeader:
-        console.log("header returned", httpEvent);
-        break;
-
-      case HttpEventType.Response:
-        if (httpEvent.body instanceof String) {
-          this.filesmessage = httpEvent.body;
-        } else {
-          console.log(httpEvent.headers.get("Content-Disposition"));
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.file.name);
+    if (this.idprojectfordoc !== 0 && this.file.name !== "") {
+      this.projetserv.upload(this.file).subscribe(
+        (e) => {
+          console.log(e.body);
+          this.projetserv
+            .assignfiletoproject(e.body, this.idprojectfordoc)
+            .subscribe();
+        },
+        (err) => {
+          console.log(err);
         }
-        break;
-      default:
-        console.log(httpEvent);
+      );
     }
   }
-  updateStatus(loaded: number, total: number, requestType: string) {
-    // this.fileStatus.status= "progress";
-    // this.fileStatus.requestType= requestType ;
-    //this.fileStatus.percent=Math.round(100* loaded /total);
-  }
-
-  onDownloadfiles(fileid: number): void {
-    this.projetserv.download(fileid).subscribe(
-      (event) => {
-        console.log(event);
-        //  this.reportProgress(event);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
-  display() {
-    this.projetserv.dispaly().subscribe((e) => {
-      this.url = e[3];
-      console.log(this.url.url);
-    });
+  onclick(e) {
+    this.file = e.target.files[0];
+    console.log(this.file.size);
   }
 }
