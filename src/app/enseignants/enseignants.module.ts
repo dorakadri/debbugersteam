@@ -8,6 +8,7 @@ import { FormEnseignantComponent } from './form-enseignant/form-enseignant.compo
 import { DetailEnseignantComponent } from './detail-enseignant/detail-enseignant.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipeEnseign } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EnseignantsComponent,
     ListEnseignantComponent,
     FormEnseignantComponent,
-    DetailEnseignantComponent
+    DetailEnseignantComponent,
+    FilterPipeEnseign
   ],
   imports: [
     CommonModule,

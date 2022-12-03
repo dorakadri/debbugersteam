@@ -8,9 +8,10 @@
           <h5 class="title">List des Enseignants</h5>
         </div>
         <div class="card-body">
-          <button  routerLink="ajouter" class="btn btn-color" >Ajouter Un Enseignant</button>
+          <button  routerLink="ajouter" [ngClass]="['btn','btn-sm', 'btn-color']" >Ajouter Un Enseignant</button>
           <form>
-            <table class="table">
+            <input class="form-control border p-2 col-md-4 align-right" [(ngModel)]="filterTexts"  placeholder="Entrer Nom de department" aria-label="Search">
+            <table [ngClass]="'table'">
               <thead  _ngcontent-neq-c27 class="text-primary">
                 <tr>
                   <th><h6>ID</h6></th>
@@ -18,17 +19,17 @@
                   <th><h6>PRENOM</h6></th>
                   <th><h6>Date Embauche</h6></th>
                   <th><h6>FONCTION</h6></th>
-                  <th><h6>ACTION</h6></th>
+                  <th class="text-right"><h6>ACTION</h6></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ens of list | paginate
+                <tr *ngFor="let ens of list | FilterPipeEnseign:filterTexts | paginate
                 : {itemsPerPage: tableSize,currentPage: page, totalItems: count }; let i = index">
                   <td>{{ens.idenseignant}}</td>
                   <td>{{ens.nom}}</td>
                   <td>{{ens.prenom}}</td>
                   <td>{{ens.dateembauche}}</td>
-                  <td>{{ens.fonction}}</td>
+                  <td [style.color]="getColor(ens.fonction)"><h6>{{ens.fonction}}</h6></td>
                   <td class="text-right">
                     <!-- info icon -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#00D100" class="bi bi-info-circle icon" viewBox="0 0 16 16" [routerLink]="['details', ens.idenseignant]">
@@ -50,7 +51,7 @@
               </tbody>
             </table>
             <div class="d-flex justify-content-center">
-              <pagination-controls   previousLabel="Précédent" nextLabel="Suivant"  (pageChange)="onTableDataChange($event)" class="pagination">
+              <pagination-controls   previousLabel="🡸" nextLabel="🡺"  (pageChange)="onTableDataChange($event)" class="my-pagination">
               </pagination-controls>
             </div>
           </form>

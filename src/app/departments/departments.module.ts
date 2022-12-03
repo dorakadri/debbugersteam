@@ -8,6 +8,7 @@ import { FormDepartmentsComponent } from './form-departments/form-departments.co
 import { ListDepartmentsComponent } from './list-departments/list-departments.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DetailDepartmentsComponent } from './detail-departments/detail-departments.component';
+import { FilterPipeDepart } from './pipes/filter.pipe';
 
 
 
@@ -15,7 +16,8 @@ import { DetailDepartmentsComponent } from './detail-departments/detail-departme
   declarations: [DepartmentsComponent,
   FormDepartmentsComponent,
 ListDepartmentsComponent,
-DetailDepartmentsComponent],
+DetailDepartmentsComponent,
+FilterPipeDepart],
   imports: [
     CommonModule,
     FormsModule,

@@ -45,33 +45,38 @@
              </div>
              <div class="form-group col-md-6">
                 <label>Fonction:*</label>
-             <select [(ngModel)]="enseignant.fonction" name="fonction" class="form-control" required>
+             <select [(ngModel)]="enseignant.fonction" name="fonction" class="form-control" required #n2="ngModel">
                 <option value="chefdepartment">chef department</option>
                 <option value="responsablemodule">responsable module</option>
+                <option value="professeur">professeur</option>
+                <option value="surveillant">surveillant</option>
               </select>
+              <div class="alert alert-danger" *ngIf="n2.invalid && n2.touched">
+                <div *ngIf="n2.hasError('required')">
+                   this field is required
+                  </div>
+            </div>
             </div>
             <div class="form-group col-md-6">
-               <label>Date:*</label>
+               <label>Date Embauche:*</label>
                <input type="date" name="dateembauche" [(ngModel)]="enseignant.dateembauche"
-               class="form-control" required>
-
-             </div>
-
-             <div class="form-group col-md-6">
+               class="form-control" required #n3="ngModel">
+               <div class="alert alert-danger" *ngIf="n3.invalid && n3.touched">
+                <div *ngIf="n2.hasError('required')">
+                   this field is required
+                  </div>
+            </div>
+            </div>
+            <div class="form-group col-md-6">
               <label>departement:*</label>
-           <select   name="departement" class="form-control" (change)="getvalue($event)"
+            <select   name="departement" class="form-control" (change)="getvalue($event)"
              required>
              <option  value="{{defaultVal}}" selected>{{defaultVal}}</option>
               <option *ngFor="let dep of selectedList "  value="{{dep.idDepart}}">{{dep.nomDepart}}</option>
             </select>
-          </div>
+             </div>
 
-             
-             <button (click)="saveEnseignant()"
-              class="btn btn-sm btn-success">
-               {{action}}
-             </button>
-           
+             <button (click)="saveEnseignant()" [ngClass]="['btn','btn-sm', 'btn-success']">{{action}}</button>
            </form>           
         </div>
       </div>

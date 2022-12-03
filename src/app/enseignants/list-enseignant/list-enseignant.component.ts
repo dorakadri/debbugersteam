@@ -13,6 +13,7 @@ export class ListEnseignantComponent implements OnInit {
   count:number=0;
   tableSize:number=5;
   tableSizes:any=[5,10];
+  public filterTexts:String='';
   constructor(private serviceEnseignant: EnseignantService) { }
 
   ngOnInit(): void {
@@ -47,4 +48,16 @@ export class ListEnseignantComponent implements OnInit {
     this.page=1;
     this.EnseignantsList();
   }
+  getColor(fonction) {
+    switch (fonction) {
+      case 'chefdepartment':
+        return  'green';
+      case 'responsablemodule':
+        return  'gold';
+      case 'professeur':
+        return  'blue';
+      case 'surveillant':
+        return  'purple';
+      }
+   }
 }

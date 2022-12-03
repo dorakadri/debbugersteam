@@ -8,19 +8,20 @@
           <h5 class="title">List Departments</h5>
         </div>
         <div class="card-body">
-          <button  routerLink="ajouter" class="btn btn-color" >Ajouter Un Department</button>
+          <button  routerLink="ajouter" [ngClass]="['btn','btn-sm', 'btn-color']" >Ajouter Un Department</button>
           <form>
-            <table class="table">
+            <input class="form-control border p-2 col-md-4" [(ngModel)]="filterTexts"  placeholder="Entrer Nom de department" aria-label="Search">
+            <table [ngClass]="'table'">
               <thead  _ngcontent-neq-c27 class="text-primary">
                 <tr>
                   <th><h6>ID</h6></th>
                   <th><h6>NOM DEPARTMENT</h6></th>
                   <th><h6>ADRESSE</h6></th>
-                  <th><h6>ACTION</h6></th>
+                  <th class="text-right"><h6>ACTION</h6></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let dep of list | paginate
+                <tr *ngFor="let dep of list | FilterPipeDepart:filterTexts | paginate
                 : {itemsPerPage: tableSize,currentPage: page, totalItems: count }; let i = index">
                   <td>{{dep.idDepart}}</td>
                   <td>{{dep.nomDepart}}</td>
@@ -46,7 +47,7 @@
               </tbody>
             </table>
             <div class="d-flex justify-content-center">
-              <pagination-controls   previousLabel="Précédent" nextLabel="Suivant"  (pageChange)="onTableDataChange($event)" class="pagination">
+              <pagination-controls   previousLabel="🡸" nextLabel="🡺"  (pageChange)="onTableDataChange($event)" class="my-pagination">
               </pagination-controls>
             </div>
           </form>

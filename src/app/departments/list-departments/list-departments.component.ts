@@ -3,6 +3,7 @@ import { Department } from './../../Core/Modals/department';
 import { DepartementService } from './../../Core/Services/department.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 @Component({
   selector: 'app-list-departments',
   templateUrl: './list-departments.component.html',
@@ -14,6 +15,7 @@ export class ListDepartmentsComponent implements OnInit {
   count:number=0;
   tableSize:number=5;
   tableSizes:any=[5,10];
+  public filterTexts:String='';
   constructor(private serviceDepartement: DepartementService) { }
 
   ngOnInit(): void {

@@ -7,7 +7,7 @@
         <div class="card-header">
           <h5 class="title">{{action}} un Department</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body-center">
           <form #f="ngForm">
             <div class="form-group col-md-6">
                <label>Nom:*</label>
@@ -44,11 +44,7 @@
                </div>
              </div>
              
-             <button (click)="saveDepartment()"
-              class="btn btn-sm btn-success">
-               {{action}}
-             </button>
-           
+             <button (click)="saveDepartment()" [ngClass]="['btn','btn-sm', 'btn-success']">{{action}}</button>
            </form>           
         </div>
       </div>
