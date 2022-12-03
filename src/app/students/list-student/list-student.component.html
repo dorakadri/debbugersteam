@@ -1,0 +1,178 @@
+<div class="panel-header panel-header-sm">
+</div>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-category">Tous les etudiants</h5>
+          <h4 class="card-title"> liste des étudiants</h4>
+          
+ 
+     
+ 
+
+
+             <td><button type="button" routerLink="/students/ajouter" class="btn btn-danger" >Ajouter Etudiant</button></td>
+                <!-- Search form -->
+<form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
+  <i class="fas fa-search" aria-hidden="true"></i>
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder=" SEARCH  ">
+</form>
+        </div>
+      
+        <div class="card-body">
+                  
+     
+            <table class="table">
+              <thead class=" text-primary">
+                 <th> id</th>
+                <th> Nom</th>
+                <th> Prénom </th>
+                 <th> Date Naissance</th>
+                <th > option </th>
+                     <th > departement </th>
+                      <th > gestion </th>
+            
+              </thead>
+              <tbody>
+    
+                <tr *ngFor="let student of studentDetails | filter:searchText">
+         <td > {{student.idEtudiant}} </td>
+          <td>{{student.nomE}}</td>
+          <td>{{student.prenomE}}</td>
+          <td>{{student.date_naissance}}</td>
+          <td > {{student.option}}</td>
+          <td *ngIf="student.departement ===null" [ngStyle]="{'color': 'red'}"  > not assigned yet   </td>
+          <td *ngIf="student.departement"[ngStyle]="{'color': 'green'}" > {{student.departement.nomDepart}} </td>
+         
+         <td class="">
+                  
+                    <!-- edit icon -->
+                    <svg xmlns="http://www.w3.or{g/2000/svg" width="22" height="22" fill="#FFDA00" class="bi bi-pencil-square icon" viewBox="0 0 16 16"   (click)="openPopup()"(click)="edit(student)">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                    <!-- trash icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-trash icon" viewBox="0 0 16 16" (click)="openPopup2()" (click)="deleteStudent(student)">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  </td>
+           
+                </tr>
+
+              </tbody>
+              
+            </table>
+       
+
+               
+          </div>
+          
+        </div>
+        
+      </div>
+ 
+        <!-- modifier form modal -->
+
+<div
+class="modal"
+tabindex="-1"
+role="dialog"
+[ngStyle]="{'display':displayStyle}">
+<div class="panel-header panel-header-sm">
+</div>
+
+
+
+
+                
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title">Modifier Etudiant</h4>
+	</div>
+	<div class="modal-body">
+	<form #updateForm="ngForm" (ngSubmit)="updateStudent()">
+          <div class="form-group">
+            <label for="idEtudiant"> idEtudiant :</label>
+            <input type="text" disabled #idEtudiant [(ngModel)]="studentToUpdate.idEtudiant" name="idEtudiant" id="idEtudiant"
+              class="form-control" >
+          </div>
+          <div class="form-group">
+            <label for="nomE">nom:</label>
+            <input type="text" #nomE [(ngModel)]="studentToUpdate.nomE" name="nomE" id="nomE" class="form-control"
+              >
+          </div>
+          <div class="form-group">
+            <label for="prenomE">prenom:</label>
+            <input type="text" #prenomE [(ngModel)]="studentToUpdate.prenomE" name="prenomE" id="prenomE"
+              class="form-control" >
+          </div>
+          <div class="form-group">
+            <label for="percentage">date naissance :</label>
+            <input type="date" #date_naissance [(ngModel)]="studentToUpdate.date_naissance" name="date_naissance" id="date_naissance"
+              class="form-control" >
+          </div>
+           <div class="form-group">
+            <label for="option">option:</label>
+         
+            	   <select #option [(ngModel)]="studentToUpdate.option"  name="option" class="form-control" required>
+      <option value="SIM">SIM</option>
+      <option value="GAMIX">GAMIX</option>
+      <option value="SE">SE</option>
+           <option value="NIDS">NIDS</option>
+    </select>
+            
+          </div>
+
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100">
+          </div>
+        </form>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger"
+				(click)="closePopup()">
+		Close
+		</button>
+	</div>
+	</div>
+</div>
+</div>
+
+      <!-- suppression modal -->
+  
+
+<div
+class="modal"
+tabindex="-1"
+role="dialog"
+[ngStyle]="{'display':displayStyle2}">
+<div class="panel-header panel-header-sm">
+</div>
+
+
+
+
+                
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" [ngStyle]="{'color': 'red'}" >Etudiant supprimé avec succés</h4>
+	</div>
+	<div class="modal-body">
+
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger"
+				(click)="closePopup2()">
+		Close
+		</button>
+	</div>
+	</div>
+</div>
+</div>
+
+  

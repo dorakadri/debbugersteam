@@ -8,6 +8,7 @@ import { UserProfileComponent } from '../../user-profile/user-profile.component'
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { StudentsComponent } from '../../students/students.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   declarations: [
     DashboardComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    StudentsComponent
   ]
 })
 

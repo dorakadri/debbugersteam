@@ -10,6 +10,9 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { FormStudentComponent } from './students/form-student/form-student.component';
+import { ListStudentComponent } from './students/list-student/list-student.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -19,10 +22,13 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    Ng2SearchPipeModule,
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FormStudentComponent,
+    ListStudentComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
