@@ -8,43 +8,33 @@
           <h5 class="title">{{action}} un Department</h5>
         </div>
         <div class="card-body-center">
-          <form #f="ngForm">
+          <form #f="ngForm" [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
             <div class="form-group col-md-6">
                <label>Nom:*</label>
-               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart"
-               class="form-control" required minlength="3"
-                pattern="[A-Za-z]{3,20}$" #n="ngModel">
-                <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
-                   <div *ngIf="n.hasError('required')">
-                      this field is required
-                     </div>
-                   <div *ngIf="n.hasError('minlength')">
-                      minlength = 3 !
-                   </div>
-                   <div *ngIf="n.hasError('pattern')">
-                     error pattern
-                  </div>
-               </div>
+               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart" formControlName="nomDepart" class="form-control">
+                <small *ngIf="!departmentForm.controls['nomDepart'].valid && departmentForm.controls['nomDepart'].touched">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"   fill="currentColor"  class="bi bi-exclamation-circle"   viewBox="0 0 16 16">
+                      <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg>
+                    <span *ngIf="departmentForm.controls['nomDepart'].hasError('required')"> le champ est obligatoire</span>
+                    <span *ngIf="departmentForm.controls['nomDepart'].hasError('minlength')"> min length is 3</span>
+                </small>
             </div>
             <div class="form-group col-md-6">
                <label>Adresse:*</label>
-               <input type="text" name="adresse" [(ngModel)]="department.adresse"
-               class="form-control" required minlength="3"
-                pattern="[A-Za-z]{3,20}$" #nd="ngModel">
-               <div class="alert alert-danger" *ngIf="nd.invalid && nd.touched">
-                   <div *ngIf="nd.hasError('required')">
-                      this field is required
-                     </div>
-                   <div *ngIf="nd.hasError('minlength')">
-                      minlength = 3 !
-                   </div>
-                   <div *ngIf="nd.hasError('pattern')">
-                     error pattern
-                  </div>
-               </div>
+               <input type="text" name="adresse" [(ngModel)]="department.adresse" formControlName="adresse" class="form-control" >
+               <small *ngIf="!departmentForm.controls['adresse'].valid && departmentForm.controls['adresse'].touched">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"   fill="currentColor"  class="bi bi-exclamation-circle"   viewBox="0 0 16 16">
+                  <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+                <span *ngIf="departmentForm.controls['adresse'].hasError('required')"> le champ est obligatoire</span>
+                <span *ngIf="departmentForm.controls['adresse'].hasError('minlength')"> min length is 5</span>
+            </small>
              </div>
              
-             <button (click)="saveDepartment()" [ngClass]="['btn','btn-sm', 'btn-success']">{{action}}</button>
+             <button  type="submit" [ngClass]="['btn','btn-sm', 'btn-success']"> {{action}}</button>
            </form>           
         </div>
       </div>

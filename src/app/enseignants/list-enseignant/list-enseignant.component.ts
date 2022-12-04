@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Enseignant } from './../../Core/Modals/enseignant';
 import { EnseignantService } from './../../Core/Services/enseignant.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list-enseignant',
@@ -29,13 +30,27 @@ export class ListEnseignantComponent implements OnInit {
     )
   }
   delete(ens:Enseignant){
-    if(confirm(' Are you sure to delete this ')){
-      let i = this.list.indexOf(ens);
+     Swal.fire({
+      title: 'vous êtes sûr?',
+      text: "voulez-vous supprimer cet enseignant!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, Supprimer !'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let i = this.list.indexOf(ens);
       this.serviceEnseignant.deleteEnseignant(ens.idenseignant).subscribe(
         ()=>{this.list.splice(i,1)}
       )
-      alert("Enseignant deleted successfully")
-    }
+        Swal.fire(
+          'Supprimé!',
+          'Enseignant supprimée avec success.',
+          'success'
+        )
+      }
+    })
     
   }
 

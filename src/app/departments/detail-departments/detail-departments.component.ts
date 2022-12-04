@@ -20,7 +20,7 @@ export class DetailDepartmentsComponent implements OnInit {
       this.departementService.getDepartmentByID(id).subscribe(
         (object: Department)=> this.department=object
       )
-      this.departementService.getNbetdperDepartment(id).subscribe(
+      this.departementService.GetNbensperDepartment(id).subscribe(
         (object: number)=> this.nbr=object
       )
     }

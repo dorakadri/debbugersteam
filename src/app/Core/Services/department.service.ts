@@ -12,7 +12,7 @@ export class DepartementService {
   public urlGetById= environment.url+'DepartmentController/displdepartmentbyid/';
   public urlAdd= environment.url+'DepartmentController/addDepartment/';
   public urlUpdate= environment.url+'DepartmentController/updatedepartment/';
-  public urlNbetudperdepartById= environment.url+'DepartmentController/GetNbetdperDepartment/';
+  public urlNbensperdepartById= environment.url+'DepartmentController/GetNbensperDepartment/';
   
   constructor(private http: HttpClient) { }
 
@@ -31,8 +31,8 @@ export class DepartementService {
   updateDepartment(dep:Department){
     return this.http.put(this.urlUpdate,dep)
   }
-  getNbetdperDepartment(id:number){
-    return this.http.get(this.urlNbetudperdepartById+id)
+  GetNbensperDepartment(id:number){
+    return this.http.get(this.urlNbensperdepartById+id)
   }
 
 }

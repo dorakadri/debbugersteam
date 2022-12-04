@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from './../../Core/Modals/department';
 import { DepartementService } from './../../Core/Services/department.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import Swal from "sweetalert2";
+
 
 
 @Component({
@@ -30,14 +32,27 @@ export class ListDepartmentsComponent implements OnInit {
     )
   }
   delete(dep:Department){
-    if(confirm(' Are you sure to delete this Department ')){
-      let i = this.list.indexOf(dep);
-      this.serviceDepartement.delete(dep.idDepart).subscribe(
-        ()=>{this.list.splice(i,1)}
-      )
-      alert("Department deleted successfully")
-    }
-    
+   Swal.fire({
+      title: 'vous êtes sûr?',
+      text: "voulez-vous supprimer cette department!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, Supprimer !'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let i = this.list.indexOf(dep);
+        this.serviceDepartement.delete(dep.idDepart).subscribe(
+          ()=>{this.list.splice(i,1)}
+        )
+        Swal.fire(
+          'Supprimé!',
+          'Department supprimée avec success.',
+          'success'
+        )
+      }
+    })
   }
 
   onTableDataChange(event: any){

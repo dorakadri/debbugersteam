@@ -6,7 +6,7 @@ import { EnseignantsComponent } from './enseignants.component';
 import { ListEnseignantComponent } from './list-enseignant/list-enseignant.component';
 import { FormEnseignantComponent } from './form-enseignant/form-enseignant.component';
 import { DetailEnseignantComponent } from './detail-enseignant/detail-enseignant.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipeEnseign } from './pipes/filter.pipe';
 
@@ -23,6 +23,7 @@ import { FilterPipeEnseign } from './pipes/filter.pipe';
     CommonModule,
     EnseignantsRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     NgxPaginationModule
   ]
 })

@@ -7,7 +7,6 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -15,8 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ChartsModule,
-    NgbModule,
-    ToastrModule.forRoot()
+    NgbModule
   ],
   declarations: [
     DashboardComponent,

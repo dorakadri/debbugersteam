@@ -8,75 +8,71 @@
           <h5 class="title">{{action}} un Enseignant</h5>
         </div>
         <div class="card-body">
-          <form #f="ngForm">
+          <form #f="ngForm" [formGroup]="EnseignantForm" (ngSubmit)="saveEnseignant()">
             <div class="form-group col-md-6">
                <label>Nom:*</label>
-               <input type="text" name="nom" [(ngModel)]="enseignant.nom"
-               class="form-control" required minlength="3"
-                pattern="[A-Za-z]{3,20}$" #n="ngModel">
-                <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
-                   <div *ngIf="n.hasError('required')">
-                      this field is required
-                     </div>
-                   <div *ngIf="n.hasError('minlength')">
-                      minlength = 3 !
-                   </div>
-                   <div *ngIf="n.hasError('pattern')">
-                     error pattern
-                  </div>
-               </div>
+               <input type="text" name="nom" [(ngModel)]="enseignant.nom" formControlName="nom" class="form-control" >
+               <small *ngIf="!EnseignantForm.controls['nom'].valid && EnseignantForm.controls['nom'].touched">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+                <span *ngIf="EnseignantForm.controls['nom'].hasError('required')"> le champ est obligatoire</span>
+                <span *ngIf="EnseignantForm.controls['nom'].hasError('minlength')"> min length is 3</span>
+            </small>
             </div>
+
             <div class="form-group col-md-6">
                 <label>Prenom:*</label>
-                <input type="text" name="prenom" [(ngModel)]="enseignant.prenom"
-                class="form-control" required minlength="3"
-                 pattern="[A-Za-z]{3,20}$" #n1="ngModel">
-                 <div class="alert alert-danger" *ngIf="n1.invalid && n1.touched">
-                    <div *ngIf="n1.hasError('required')">
-                       this field is required
-                      </div>
-                    <div *ngIf="n1.hasError('minlength')">
-                       minlength = 3 !
-                    </div>
-                    <div *ngIf="n1.hasError('pattern')">
-                      error pattern
-                   </div>
-                </div>
+                <input type="text" name="prenom" [(ngModel)]="enseignant.prenom" formControlName="prenom" class="form-control">
+                <small *ngIf="!EnseignantForm.controls['prenom'].valid && EnseignantForm.controls['prenom'].touched">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                    <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                  </svg>
+                  <span *ngIf="EnseignantForm.controls['prenom'].hasError('required')"> le champ est obligatoire</span>
+                  <span *ngIf="EnseignantForm.controls['prenom'].hasError('minlength')"> min length is 3</span>
+                </small>
              </div>
              <div class="form-group col-md-6">
                 <label>Fonction:*</label>
-             <select [(ngModel)]="enseignant.fonction" name="fonction" class="form-control" required #n2="ngModel">
+             <select [(ngModel)]="enseignant.fonction" name="fonction"  formControlName="fonction" class="form-control" >
                 <option value="chefdepartment">chef department</option>
                 <option value="responsablemodule">responsable module</option>
                 <option value="professeur">professeur</option>
                 <option value="surveillant">surveillant</option>
               </select>
-              <div class="alert alert-danger" *ngIf="n2.invalid && n2.touched">
-                <div *ngIf="n2.hasError('required')">
-                   this field is required
-                  </div>
+              <small *ngIf="!EnseignantForm.controls['fonction'].valid && EnseignantForm.controls['fonction'].touched">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+                <span *ngIf="EnseignantForm.controls['fonction'].hasError('required')"> le champ est obligatoire</span>
+              </small>
             </div>
-            </div>
+
             <div class="form-group col-md-6">
                <label>Date Embauche:*</label>
                <input type="date" name="dateembauche" [(ngModel)]="enseignant.dateembauche"
-               class="form-control" required #n3="ngModel">
-               <div class="alert alert-danger" *ngIf="n3.invalid && n3.touched">
-                <div *ngIf="n2.hasError('required')">
-                   this field is required
-                  </div>
+               class="form-control"  formControlName="dateembauche" >
+               <small *ngIf="!EnseignantForm.controls['dateembauche'].valid && EnseignantForm.controls['dateembauche'].touched">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                  <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                </svg>
+                <span *ngIf="EnseignantForm.controls['dateembauche'].hasError('required')"> le champ est obligatoire</span>
+               </small>
             </div>
-            </div>
+
             <div class="form-group col-md-6">
               <label>departement:*</label>
-            <select   name="departement" class="form-control" (change)="getvalue($event)"
-             required>
+            <select   name="departement" class="form-control" (change)="getvalue($event)"  required>
              <option  value="{{defaultVal}}" selected>{{defaultVal}}</option>
               <option *ngFor="let dep of selectedList "  value="{{dep.idDepart}}">{{dep.nomDepart}}</option>
             </select>
              </div>
 
-             <button (click)="saveEnseignant()" [ngClass]="['btn','btn-sm', 'btn-success']">{{action}}</button>
+             <button type="submit" [ngClass]="['btn','btn-sm', 'btn-success']">{{action}}</button>
            </form>           
         </div>
       </div>
