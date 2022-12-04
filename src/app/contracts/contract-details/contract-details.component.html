@@ -1,1 +1,55 @@
-<p>contract-details works!</p>
+<div class="main-content" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header primary-title">
+                    Contract Details: 
+                </div>
+                <div class="card-body">
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Start Date: {{contract.dateDebutContrat}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">End Date: {{contract.dateFinContrat}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Archived: {{contract.archive}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Speciality: {{contract.specialite}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Contract Amount: {{contract.montantContrat}}</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Show Student Details -->
+    
+    <div class="row" *ngIf="contract.etudiant">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header primary-title">
+                    Student: 
+                </div>
+                <div class="card-body">
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">First Name: {{contract.etudiant.prenomE}}</span> 
+                        <!-- {{}} -->
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Second Name: {{contract.etudiant.nomE}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Date Of Birth: {{contract.etudiant.date_naissance}}</span> 
+                    </div>
+                    <div class="mt-3 mb-3">
+                        <span class="second-title">Option: {{contract.etudiant.op}}</span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,240 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" style="margin-top: 100px;">
+  <div class="card">
+    <div class="card-body">
+      <form #searchForm="ngForm" (ngSubmit)="onSearch(searchForm)">
+        <div class="row">
+          <div class="col-md-1">
+            <div class="form-group">
+              <label>ref contract</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              placeholder="#CRT..."
+              name="idContrat" 
+              ngModel
+              #refCrt="ngModel"
+              >
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Start date</label><br>
+              <input 
+              type="date" 
+              id="start"
+              name="startDate" 
+              class="dateInput"
+              ngModel
+              #startDate="ngModel"
+              >
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>End date</label><br>
+              <input 
+              type="date" 
+              id="end"
+              name="endDate" 
+              class="dateInput"
+              ngModel
+              #endDate="ngModel"
+              >
+            </div>
+            <small *ngIf="startDate.dirty && endDate.dirty && endDate.value<=startDate.value">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+              </svg>
+              End date should be less than start date
+            </small>
+          </div>
+          <!-- <div class="col-md-2">
+            <div class="form-group">
+              <label>Student Name</label>
+              <input type="text" class="form-control" placeholder="Student Name">
+            </div>
+          </div> -->
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Speciality</label>
+              <select class="custom-select" 
+              name="speciality" 
+              [(ngModel)]="option1"
+              >
+                <option 
+                *ngFor="let option of options" 
+                >{{option}}</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="col-md-2">
+            <div class="form-group">
+              <label>Archived</label>
+              <div class="form-check">
+                <input 
+                class="form-check-input" 
+                type="radio" 
+                id="AllRadio" 
+                ngModel
+                name="archive"
+                value="all"
+                #archive="ngModel"
+                >
+                <label class="form-check-label" for="AllRadio">
+                  ALL
+                </label>
+              </div>
+              <div class="form-check">
+                <input 
+                class="form-check-input" 
+                type="radio"
+                id="ArchivedRadio"
+                name="archive"
+                value="true"
+                ngModel
+                #archive="ngModel"
+                />
+                <label class="form-check-label" for="ArchivedRadio">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                    <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+                  </svg>
+                </label>
+              </div>
+              <div class="form-check">
+                <input 
+                class="form-check-input" 
+                type="radio" 
+                id="NonArchivedRadio"
+                name="archive"
+                value="false"
+                ngModel
+                #archive="ngModel"
+                />
+                <label class="form-check-label" for="NonArchivedRadio">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                  </svg>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group" style="padding-top: 15px;">
+              <button 
+              type="submit" 
+              class="btn" 
+              style="background-color: #FA7641;"
+              [disabled]="startDate.dirty && endDate.dirty && endDate.value<=startDate.value"
+              >Search</button>
+            </div>
+          </div>
+        </div>
+    </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header text-right">
+          <div class="form-group" style="padding-top: 15px;">
+            <button type="button" class="btn" style="background-color: #FA7641;" routerLink="new">Add New Contract</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- <div class="table-responsive"> -->
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  ref contract
+                </th>
+                <th>
+                  Start date
+                </th>
+                <th>
+                  End date
+                </th>
+                <th>
+                  Archived
+                </th>
+                <th>
+                  Specialty
+                </th>
+                <!-- <th>
+                    Team Name
+                </th> -->
+                <th>
+                    Student Name
+                </th>
+                <th class="text-right">
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let contract of list">
+                  <td>
+                    #CRT{{contract.idContrat}}
+                  </td>
+                  <td>
+                    {{contract.dateDebutContrat}}
+                  </td>
+                  <td>
+                    {{contract.dateFinContrat}}
+                  </td>
+                  <td>
+                    <div *ngIf="contract.archive">
+                      true
+                    </div>
+                    <div *ngIf="!contract.archive">
+                      false
+                    </div>
+                    {{contract.Archive}}
+                  </td>
+                  <td>
+                    {{contract.specialite}}
+                  </td>
+                  <!-- <td>
+                    {{contract.}}
+                  </td> -->
+                  <td>
+                      <select #selectedStudent class="custom-select" (change)="AffectStudentOnChange(selectedStudent.value, contract)">
+                        <option selected *ngIf="contract.etudiant">{{contract.etudiant.nomE}} {{contract.etudiant.prenomE}}</option>
+                        <option selected *ngIf="!contract.etudiant">not Affected yet !</option>
+                        <option *ngFor="let student of studentsList" [ngValue]="student">{{student.nomE}} {{student.prenomE}}</option>
+                      </select>
+                    <!-- <div *ngIf="contract.etudiant">
+                      {{contract.etudiant.nomE}} {{contract.etudiant.prenomE}}
+                    </div>
+                    <div *ngIf="!contract.etudiant">
+                      not Affected yet !
+                    </div> -->
+                  </td>
+                  <td class="text-right">
+                    <!-- info icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#00D100" class="bi bi-info-circle icon" viewBox="0 0 16 16" [routerLink]="['detail', contract.idContrat]">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <!-- edit icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#FFDA00" class="bi bi-pencil-square icon" viewBox="0 0 16 16" [routerLink]="['update', contract.idContrat ]">
+                      <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                    <!-- trash icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="red" class="bi bi-trash icon" viewBox="0 0 16 16" (click)="deleteContractOnClick(contract.idContrat)">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <!-- </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.icon{
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.dateInput{
+    border: solid 1px #F0F0F0;
+    border-radius: 20px;
+    padding: 6px;
+}
+
+.form-check, .form-check-input{
+    cursor: pointer;
+}
+
+.form-check-input:checked{
+    background-color: #FA7641;
+    border: #FA7641;
+}
+
+.form-check-label{
+    padding-left: 10px;
+}
+
+/* form validation style */
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+small{
+    color: red;
+}

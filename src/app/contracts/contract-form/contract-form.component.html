@@ -1,1 +1,258 @@
-<p>contract-form works!</p>
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content" style="margin-top: 100px;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">{{action}} Contract</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="contractForm" (ngSubmit)="onSubmit()">
+            <div class="row py-3">
+              <div class="col-md-5 pl-3">
+                <div class="form-group">
+                    <label>Start date</label><br>
+                    <input 
+                    type="date" 
+                    id="start" 
+                    class="dateInput"
+                    formControlName="dateDebutContrat"
+                    >
+                  </div>
+                  <small *ngIf="!contractForm.get('dateDebutContrat').valid && contractForm.get('dateDebutContrat').touched">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg>
+                    start date is required
+                  </small>
+              </div>
+              <div class="col-md-5 offset-md-2">
+                <div class="form-group">
+                    <label>End date</label><br>
+                    <input 
+                    type="date" 
+                    id="end" 
+                    name="end" 
+                    class="dateInput"
+                    formControlName="dateFinContrat"
+                    >
+                  </div>
+                  <small *ngIf="!contractForm.get('dateFinContrat').valid && contractForm.get('dateFinContrat').touched">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg>
+                    End date is required
+                  </small>
+                  <small *ngIf="contractForm.get('dateDebutContrat').dirty && contractForm.get('dateFinContrat').dirty && contractForm.get('dateFinContrat').value<=contractForm.get('dateDebutContrat').value">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                      <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                    </svg>
+                    End date should be less than start date
+                  </small>
+              </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Speciality</label>
+                        <select class="custom-select" formControlName="specialite" [(ngModel)]="selectedSpeciality">
+                          <option *ngFor="let spec of specialities" [ngValue]="spec" value="spec">{{spec}}</option>
+                        </select>
+                      </div>
+                      <small *ngIf="!contractForm.get('specialite').valid && contractForm.get('specialite').touched">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                          <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                        </svg>
+                        specialite is required
+                      </small>
+                </div>
+            </div>
+            <div class="row py-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Archived</label>
+
+                      <div class="form-check">
+                        <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        id="ArchivedRadio"
+                        formControlName="archive"
+                        value="true"
+                        />
+                        <label class="form-check-label" for="ArchivedRadio">
+                          Yes
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        id="NonArchivedRadio"
+                        formControlName="archive"
+                        value="false"
+                        />
+                        <label class="form-check-label" for="NonArchivedRadio">
+                          No
+                        </label>
+                      </div>
+                    </div>
+                    <small *ngIf="!contractForm.get('archive').valid && contractForm.get('archive').touched">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                      </svg>
+                      archive is required
+                    </small>
+                </div>
+            </div>
+            <div class="row py-3">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Montant Contrat en DT</label>
+                  <input 
+                  type="number" 
+                  class="form-control" 
+                  name="montant" 
+                  min="0"
+                  formControlName="montantContrat"
+                  >
+                </div>
+                <small *ngIf="!contractForm.get('montantContrat').valid && contractForm.get('montantContrat').touched">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                  </svg>
+                  montant Contrat is required
+                </small>
+              </div>
+            </div>
+            <!-- **********************add student section********************** -->
+            <div *ngIf="contractForm.get('dateDebutContrat').valid 
+                        && contractForm.get('dateFinContrat').valid 
+                        && contractForm.get('specialite').valid 
+                        && contractForm.get('archive').valid 
+                        && contractForm.get('montantContrat').valid">
+              <div class="mt-5">
+                <div class="btn btn-success" (click)="addStudentBtnOnClick()" id="addStudentBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-circle mr-2" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                  add new Student
+                </div>
+                <div class="btn btn-secondary ml-5" (click)="affectStudentBtnOnClick()" id="affectStudentBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-node-plus-fill mr-2" viewBox="0 0 16 16">
+                    <path d="M11 13a5 5 0 1 0-4.975-5.5H4A1.5 1.5 0 0 0 2.5 6h-1A1.5 1.5 0 0 0 0 7.5v1A1.5 1.5 0 0 0 1.5 10h1A1.5 1.5 0 0 0 4 8.5h2.025A5 5 0 0 0 11 13zm.5-7.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2a.5.5 0 0 1 1 0z"/>
+                  </svg>
+                  affect to a student
+                </div>
+              </div>
+            </div>
+            
+            <div formGroupName="etudiant" class="disNone" id="studentForm">
+              <h4 class="title">Add Student</h4>
+              <div class="row py-3">
+                <div class="col-md-4">
+                  <input 
+                    type="text" 
+                    class="form-control py-3" 
+                    formControlName="prenomE"
+                    placeholder="first name"
+                    >
+                    <small *ngIf="!((contractForm.get('etudiant')).get('prenomE')).valid && ((contractForm.get('etudiant')).get('prenomE')).touched">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                      </svg>
+                      first name is required
+                    </small>
+                  </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-md-4">
+                  <input 
+                    type="text" 
+                    class="form-control py-3" 
+                    formControlName="nomE"
+                    placeholder="second name"
+                    >
+                    <small *ngIf="!((contractForm.get('etudiant')).get('nomE')).valid && ((contractForm.get('etudiant')).get('nomE')).touched">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                      </svg>
+                      second name is required
+                    </small>
+                  </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-md-4">
+                  <input 
+                    type="date" 
+                    class="form-control py-3" 
+                    formControlName="date_naissance"
+                    >
+                    <small *ngIf="!((contractForm.get('etudiant')).get('date_naissance')).valid && ((contractForm.get('etudiant')).get('date_naissance')).touched">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                      </svg>
+                      date of birth is required
+                    </small>
+                  </div>
+              </div>
+              <div class="row py-3">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>option</label>
+                        <select class="custom-select" formControlName="op" [(ngModel)]="selectedOp">
+                          <option *ngFor="let op of options" [ngValue]="op" value="op">{{op}}</option>
+                        </select>
+                        <small *ngIf="!((contractForm.get('etudiant')).get('op')).valid && ((contractForm.get('etudiant')).get('op')).touched">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                          </svg>
+                          option is required
+                        </small>
+                      </div>
+                </div>
+            </div>
+            </div>
+            <!-- ********************** end student Form ********************* -->
+
+            <!-- Start dropdown list of students -->
+            <div class="col-md-4 pt-3 disNone" id="studentsDropDownList">
+              <select #selectedStudent class="custom-select" (change)="selectedStudentOnChange(selectedStudent.value)">
+                <option *ngFor="let student of studentsList" [ngValue]="student">{{student.nomE}} {{student.prenomE}}</option>
+              </select>
+            </div>
+            <!-- end dropdown list of students -->
+
+            <div class="row py-3">
+                <div class="col-md-11 text-right">
+                    <button [disabled]="!contractForm.get('dateDebutContrat').valid 
+                                        || !contractForm.get('dateFinContrat').valid 
+                                        || !contractForm.get('specialite').valid 
+                                        || !contractForm.get('archive').valid 
+                                        || !contractForm.get('montantContrat').valid
+                                        || contractForm.get('dateDebutContrat').dirty && contractForm.get('dateFinContrat').dirty && contractForm.get('dateFinContrat').value<=contractForm.get('dateDebutContrat').value" 
+                    type="submit" 
+                    class="btn" 
+                    style="background-color: #FA7641;"
+                    >submit
+                  </button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
