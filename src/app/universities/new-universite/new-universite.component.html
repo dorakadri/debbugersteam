@@ -1,0 +1,130 @@
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">{{action}} universities</h5>
+        </div>
+        <div class="card-body">
+          
+            <form  [formGroup]="univForm" (ngSubmit)="Save()">
+              <div class="row">
+                <div class="col-md-5 pr-1">
+                  <div class="form-group">
+                    <label for="nom">University name </label>
+                   <input type="text" name="nomUniv"  formControlName="nomUniv" [ngModel]="university.nomUniv" id="nomUniv"
+                   class="form-control" placeholder="nom" >
+                   <small *ngIf="!univForm.controls['nomUniv'].valid && univForm.controls['nomUniv'].touched ">
+                   <svg xmlns="http://www.w3.org/2000/svg"
+                     width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16"  >
+                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                     <path   d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                   </svg>
+                   <span *ngIf="   univForm.controls['nomUniv'].hasError('required') " >
+                     champs obligatoir</span >
+                   <span *ngIf="  univForm.controls['nomUniv'].hasError('minlength') " >
+                     min length is 3</span >
+                 </small>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                   <label for="mail">Mail University  </label>
+                    <input type="email" name="mail" formControlName="mail" [ngModel]="university.mail" id="mail" class="form-control" placeholder="mail" >
+                    <small *ngIf=" !univForm.controls['mail'].valid &&  univForm.controls['mail'].touched " >
+                    <svg xmlns="http://www.w3.org/2000/svg"  width="16" height="16"fill="currentColor"
+                      class="bi bi-exclamation-circle"  viewBox="0 0 16 16"  >
+                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"  />
+                      <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                    </svg>
+                    <span *ngIf=" univForm.controls['mail'].hasError('required') "  >
+                      champs obligatoir</span  >
+                    <span *ngIf="univForm.controls['mail'].hasError('email')">
+                      example aaa @esprit.tn</span>
+                  </small>
+
+                  </div>
+                </div>
+                <div class="col-md-3 px-1">
+                  <div class="form-group">
+                    <label for="webSite">WebSite University  </label>
+                    <input  name="webSite" formControlName="webSite" [ngModel]="university.webSite" id="WebSite" 
+                     class="form-control" placeholder="www.example.com"  >
+                    <small  *ngIf="  !univForm.controls['webSite'].valid && univForm.controls['webSite'].touched ">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                     <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                   </svg>
+                   <span
+                     *ngIf=" univForm.controls['webSite'].hasError('required')" >
+                     champs obligatoir</span >
+                   <span     *ngIf=" univForm.controls['webSite'].hasError('minlength')" >
+                     min length is 3</span>
+                     <span     *ngIf=" univForm.controls['webSite'].hasError('pattern')" >
+                    pattern must be www.example.com</span>
+                
+                 </small>
+                  
+                  </div>
+                </div>
+              
+
+
+              </div>
+                
+          
+       
+                <div class="table-responsive">
+                  <table class="table align-middle mb-0 bg-white">
+                    <thead class="bg-light">
+                      <th  >
+                        select
+                      </th>
+                      <th>
+                        ID
+                      </th>
+                      <th>
+                       departement Name
+                      </th>
+                      
+                    </thead>
+  
+                      <tbody  *ngFor="let d of Listdep " >
+                     <tr>
+                          <td>
+                            <div class="form-check"   >
+                              <label class="form-check-label ">
+                                <input class="form-check-input" type="checkbox"  [value]= "d.idDepart" [checked]="idselected.includes(d.idDepart)"  (change)="getid($event)">
+                                <span class="form-check-sign"></span>
+                              </label>
+                            </div>
+                          </td>
+                         <td class="text-left">{{d.idDepart}}</td>
+                          <td class="text-left">{{d.nomDepart}}</td>
+                        
+                        </tr>
+  
+  
+                      </tbody>
+  
+                  </table>
+              </div>
+            
+     
+      
+      
+             <button type="submit" class="btn btn-danger" value="Register"   [disabled]="univForm.invalid" > {{action}}University</button>
+        
+       
+            </form>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
