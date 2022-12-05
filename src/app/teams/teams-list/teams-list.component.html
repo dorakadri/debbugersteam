@@ -11,14 +11,14 @@
           </div>
         </div>
         <div class="card-body">
-          <!-- <div class="table-responsive"> -->
+          <input class="form-control border p-2 col-md-8 align-right" [(ngModel)]="filterTexts"  placeholder="Entrer Nom de l'equipe" aria-label="Search">
             <table class="table">
               <thead class=" text-primary">
                 <th>
-                  Nom equipe
+                  Id
                 </th>
                 <th>
-                  Niveau equipe
+                  Nom equipe1
                 </th>
                 <th>
                   niveau
@@ -33,13 +33,14 @@
                     Team Name
                 </th> -->
                 <th>
-                    Student Name
+                   
                 </th>
                 <th class="text-right">
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let t of list">
+                <tr *ngFor="let t of list | FilterPipeTeam:filterTexts | paginate
+                : {itemsPerPage: tableSize,currentPage: page, totalItems: count }; let i = index">
                   <td>
                     {{t.idEquipe}}
                   </td>
@@ -81,7 +82,8 @@
                 </tr>
               </tbody>
             </table>
-          <!-- </div> -->
+            <pagination-controls   previousLabel="🡸" nextLabel="🡺"  (pageChange)="onTableDataChange($event)" class="my-pagination">
+            </pagination-controls>
         </div>
       </div>
     </div>

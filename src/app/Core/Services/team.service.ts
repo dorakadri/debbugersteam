@@ -10,7 +10,7 @@ export class TeamService {
   public urlGET= environment.url+'EquipeController/displayEquipes/';
   public urlDel= environment.url+'EquipeController/deleteEquipe/';
   public urlGetById= environment.url+'EquipeController/displayEquipeById/';
-  public urlAdd= environment.url+'EquipeController/addEquipe/';
+  public urlAdd= environment.url+'EquipeController/addEquipe';
   public urlUpdate= environment.url+'EquipeController/updateEquipe/';
 
   constructor(private http: HttpClient) { }

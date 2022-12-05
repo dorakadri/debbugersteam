@@ -8,35 +8,52 @@
           <h5 class="title">{{action}} Une equipe</h5>
         </div>
         <div class="card-body">
-          <form #f="ngForm">
+          <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
             <div class="form-group col-md-6">
                <label>Nom:*</label>
-               <input type="text" name="nomEquipe" [(ngModel)]="team.nomEquipe"
-               class="form-control" required minlength="3"
-                pattern="[A-Za-z]{3,20}$" #n="ngModel">
-                <div class="alert alert-danger" *ngIf="n.invalid && n.touched">
-                   <div *ngIf="n.hasError('required')">
-                      this field is required
-                     </div>
-                   <div *ngIf="n.hasError('minlength')">
-                      minlength = 3 !
-                   </div>
-                   <div *ngIf="n.hasError('pattern')">
-                     error pattern
-                  </div>
-               </div>
+               <input 
+               type="text" 
+               name="nomEquipe" 
+               formControlName="nomEquipe"
+               class="form-control"
+                >
+                
             </div>
             <div class="form-group col-md-6">
                <label>Niveau:*</label>
-               <select [(ngModel)]="team.niveau" name="niveau" class="form-control" required>
-                <option value="JUNIOR">JUNIOR</option>
-                <option value="SINIOR">SINIOR</option>
-                <option value="EXPERT">EXPERT</option>
+               <select  class="form-control" formControlName="niveau">
+                <!-- <option  value="{{selectedNiveau}}" selected> {{selectedNiveau}}</option> -->
+                <option *ngFor="let op of niveaux" [ngValue]="op"> {{op}}</option>
               </select>
             
-             </div>
-             
-             <button (click)="saveTeam()"
+            </div>
+            
+
+            <h3>detail Equipe:</h3>
+            <div class="row"  formGroupName="detail_equipe">
+              <div class="form-group col-md-6">
+                <input 
+                type="text" 
+                name="salle" 
+                formControlName="salle"
+                class="form-control" 
+                required 
+                minlength="3"
+                placeholder="salle">
+                
+              </div>
+              
+              <div class="form-group col-md-6">
+                <input 
+                type="text" 
+                name="thematique" 
+                formControlName="thematique"
+                class="form-control" 
+                placeholder="thematique">
+              </div>
+            </div>
+             <button 
+             type="submit"
               class="btn btn-sm btn-success">
                {{action}}
              </button>
@@ -46,4 +63,6 @@
       </div>
     </div>
   </div>
+
+  
 </div>

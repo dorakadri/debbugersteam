@@ -2,3 +2,10 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
+.my-pagination /deep/ .ngx-pagination .current {
+    background: red;
+    padding-right:10px;
+    padding-left:10px;
+    border-radius: 20px;
+  }
