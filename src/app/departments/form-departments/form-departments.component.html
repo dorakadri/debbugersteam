@@ -8,30 +8,30 @@
           <h5 class="title">{{action}} un Department</h5>
         </div>
         <div class="card-body-center">
-          <form #f="ngForm" [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
+          <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
             <div class="form-group col-md-6">
                <label>Nom:*</label>
-               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart" formControlName="nomDepart" class="form-control">
-                <small *ngIf="!departmentForm.controls['nomDepart'].valid && departmentForm.controls['nomDepart'].touched">
+               <input type="text" name="nomDepart" [(ngModel)]="department.nomDepart" formControlName="nomDepart" class="form-control" required>
+                <div *ngIf="!departmentForm.controls['nomDepart'].valid && departmentForm.controls['nomDepart'].touched" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"   fill="currentColor"  class="bi bi-exclamation-circle"   viewBox="0 0 16 16">
                       <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                       <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
                     </svg>
                     <span *ngIf="departmentForm.controls['nomDepart'].hasError('required')"> le champ est obligatoire</span>
                     <span *ngIf="departmentForm.controls['nomDepart'].hasError('minlength')"> min length is 3</span>
-                </small>
+                  </div>
             </div>
             <div class="form-group col-md-6">
                <label>Adresse:*</label>
-               <input type="text" name="adresse" [(ngModel)]="department.adresse" formControlName="adresse" class="form-control" >
-               <small *ngIf="!departmentForm.controls['adresse'].valid && departmentForm.controls['adresse'].touched">
+               <input type="text" name="adresse" [(ngModel)]="department.adresse" formControlName="adresse" class="form-control"  required>
+               <div *ngIf="!departmentForm.controls['adresse'].valid && departmentForm.controls['adresse'].touched">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"   fill="currentColor"  class="bi bi-exclamation-circle"   viewBox="0 0 16 16">
                   <path  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                   <path  d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
                 </svg>
                 <span *ngIf="departmentForm.controls['adresse'].hasError('required')"> le champ est obligatoire</span>
                 <span *ngIf="departmentForm.controls['adresse'].hasError('minlength')"> min length is 5</span>
-            </small>
+            </div>
              </div>
              
              <button  type="submit" [ngClass]="['btn','btn-sm', 'btn-success']"> {{action}}</button>

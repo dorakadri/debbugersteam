@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
   styleUrls: ['./form-departments.component.css']
 })
 export class FormDepartmentsComponent implements OnInit {
-  public department: Department;
+  public department: Department=new Department();
   public action: string;
   public departmentForm: FormGroup;
   constructor(private builder: FormBuilder,private departementService: DepartementService,
@@ -27,24 +27,15 @@ export class FormDepartmentsComponent implements OnInit {
       this.departementService.getDepartmentByID(id).subscribe(
         (object: Department)=> this.department=object
       )
-      console.log(this.department)
-      console.log(id)
     }else
     { this.action="ajouter";
       this.department = new Department();
     }
-    if (this.action === "ajouter") {
-      this.departmentForm = this.builder.group({
-        nomDepart: ["", [Validators.required, Validators.minLength(3)]],
-        adresse: ["", [Validators.required, Validators.minLength(5)]]
-      });
-    } else {
-      this.departmentForm = this.builder.group({
-        idDepart: [id, []],
-        nomDepart: ["", [Validators.required, Validators.minLength(3)]],
-        adresse: ["", [Validators.required, Validators.minLength(5)]]
-     });
-    }
+    this.departmentForm = this.builder.group({
+      
+      nomDepart: new FormControl('', Validators.minLength(3)),
+      adresse: new FormControl('', Validators.minLength(5))
+    });
   }
   saveDepartment(){
    if (this.departmentForm.valid) {
@@ -79,5 +70,12 @@ export class FormDepartmentsComponent implements OnInit {
     timer: 2000
   })}
   }
+
+  get nomDepart() {
+    return this.nomDepart.get('nomDepart');
+} 
+get adresse() {
+  return this.adresse.get('adresse');
+} 
 
 }

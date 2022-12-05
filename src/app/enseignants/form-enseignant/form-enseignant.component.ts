@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 })
 export class FormEnseignantComponent implements OnInit {
   public enseignant: Enseignant=new Enseignant();
+  public EnseignantForm: FormGroup;
   public idDepar:number;
   public action: string;
   public selectedList:Department[]=[];
@@ -21,7 +22,6 @@ export class FormEnseignantComponent implements OnInit {
   public idselected:number[]=[];
   public select :string ;
   public defaultVal:string="not assigned yet";
-  public EnseignantForm: FormGroup;
   constructor(private builder: FormBuilder,private enseignantService: EnseignantService,private departementService: DepartementService,
     private router:Router, private currentRoute: ActivatedRoute) { }
 
@@ -48,22 +48,14 @@ export class FormEnseignantComponent implements OnInit {
 
       }
     )
-    if (this.action === "ajouter") {
-      this.EnseignantForm = this.builder.group({
-        nom: ["", [Validators.required, Validators.minLength(3)]],
-        prenom: ["", [Validators.required, Validators.minLength(3)]],
-        dateembauche: ["", [Validators.required]],
-        fonction: ["", [Validators.required]],
-      });
-    } else {
-      this.EnseignantForm = this.builder.group({
-        idenseignant: [id, []],
-        nom: ["", [Validators.required, Validators.minLength(3)]],
-        prenom: ["", [Validators.required, Validators.minLength(3)]],
-        dateembauche: ["", [Validators.required]],
-        fonction: ["", [Validators.required]],
-     });
-    }
+    this.EnseignantForm = this.builder.group({
+      nom: new FormControl('', Validators.minLength(3)),
+      prenom: new FormControl('', Validators.minLength(3)),
+      dateembauche: new FormControl('', Validators.required),
+      fonction: new FormControl('', Validators.required)
+  
+    });
+    
   }
 
   saveEnseignant(){
@@ -104,8 +96,20 @@ export class FormEnseignantComponent implements OnInit {
   }
 
   getvalue(e)
-  { console.log(e.target.value)
+  {
     this.idDepar=e.target.value;
   }
 
+  get nom() {
+    return this.nom.get('nom');
+  } 
+  get prenom() {
+    return this.prenom.get('prenom');
+  } 
+  get dateembauche() {
+    return this.dateembauche.get('dateembauche');
+  } 
+  get fonction() {
+    return this.fonction.get('fonction');
+  } 
 }

@@ -25,7 +25,6 @@ export class ListEnseignantComponent implements OnInit {
     this.serviceEnseignant.getAllEnseignant().subscribe(
       (data:Enseignant[])=>{
         this.list=data;
-        console.log(this.list)
        }
     )
   }
