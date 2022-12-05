@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { University } from '../../Core/Modals/university';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -9,6 +9,7 @@ import { UniversityService } from '../../Core/Services/university.service';
   styleUrls: ['./list-universite.component.css']
 })
 export class ListUniversiteComponent implements OnInit {
+  @ViewChild('htmlData') htmlData!: ElementRef;
   nomUniv;
  public list: University[];
  
@@ -52,19 +53,19 @@ export class ListUniversiteComponent implements OnInit {
 
   }
    //code pour convertir le tableau au pdf
-   /*  generatePDF() { 
+     generatePDF() { 
       
-  var data = document.getElementById('contentToConvert');
-   html2canvas(data).then(canvas => {
-     var imgWidth = 208;
-     var imgHeight = canvas.height * imgWidth / canvas.width;
-     const contentDataURL = canvas.toDataURL('image/png')
-     let PDF = new jsPDF('p', 'mm', 'a4');
-     var position = 0;
-     PDF.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-     PDF.save('newPDF.pdf');
-   }); 
-  }  */
+      let DATA: any = document.getElementById('htmlData');
+      html2canvas(DATA).then((canvas) => {
+        let fileWidth = 208;
+        let fileHeight = (canvas.height * fileWidth) / canvas.width;
+        const FILEURI = canvas.toDataURL('image/png');
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+        PDF.save('vewPDF.pdf');
+      }); 
+  }  
 
 }
 
