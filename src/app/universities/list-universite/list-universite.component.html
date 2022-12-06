@@ -37,8 +37,11 @@
               <tr >
                 <td> {{u.nomUniv}}</td>  
                 <td> {{u.mail}}</td> 
-                <td [ngStyle]="{'color':'blue'}"> {{u.webSite}} </td>   
-                <td ><li  *ngFor="let d of u.departments">  {{d.nomDepart}}</li></td>             
+                <td [ngStyle]="{'color':'blue'}"> {{u.webSite}} </td> 
+                
+                
+                <td ><li  *ngFor="let d of u.departments" [ngClass]="u.departments.length>1 ?'text-success':'text-primary'"
+                  >  {{d.nomDepart}}</li></td>             
 
               <td>  
                 
