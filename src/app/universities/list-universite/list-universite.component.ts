@@ -3,6 +3,7 @@ import { University } from '../../Core/Modals/university';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { UniversityService } from '../../Core/Services/university.service';
+
 @Component({
   selector: 'app-list-universite',
   templateUrl: './list-universite.component.html',
@@ -12,7 +13,11 @@ export class ListUniversiteComponent implements OnInit {
   @ViewChild('htmlData') htmlData!: ElementRef;
   nomUniv;
  public list: University[];
- 
+ page:number=1;
+  count:number=0;
+  tableSize:number=3;
+  tableSizes:any=[3,10];
+
   constructor(private univService: UniversityService) { }
 
   ngOnInit(): void {
@@ -67,6 +72,16 @@ export class ListUniversiteComponent implements OnInit {
       }); 
   }  
 
+
+  onTableDataChange(event: any){
+    this.page=event;
+    this.list;
+  }
+  OnTableSizeChange(event: any):void{
+    this.tableSize=event.target.value;
+    this.page=1;
+    this.list;
+  }
 }
 
  

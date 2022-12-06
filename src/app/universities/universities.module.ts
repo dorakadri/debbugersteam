@@ -8,7 +8,7 @@ import { DetailUniversiteComponent } from './detail-universite/detail-universite
 import { RouterModule } from '@angular/router';
 import { ListUniversiteComponent } from './list-universite/list-universite.component';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 routes:[
   
 ]
@@ -25,6 +25,7 @@ routes:[
     UniversitiesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   
     
   ]

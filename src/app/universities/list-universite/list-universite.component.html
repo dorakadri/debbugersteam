@@ -33,7 +33,8 @@
               <th>Name Departement </th>
               <th> Action </th>
              </thead>
-            <tbody *ngFor="let u of list">
+            <tbody *ngFor="let u of list | paginate
+            : {itemsPerPage: tableSize,currentPage: page, totalItems: count }; let i = index">
               <tr >
                 <td> {{u.nomUniv}}</td>  
                 <td> {{u.mail}}</td> 
@@ -65,8 +66,13 @@
               </tr>
              
             </tbody>
+           
           </table>
        
       </div>
+      <pagination-controls   previousLabel="🡸" nextLabel="🡺"  (pageChange)="onTableDataChange($event)" class="my-pagination">
+      </pagination-controls>
+      
+
     </div>
   </div>
